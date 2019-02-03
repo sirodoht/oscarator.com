@@ -3,7 +3,25 @@
 {% load static %}
 
 {% block content %}
-<section class="results">
-
+<section class="predictions">
+    <div class="predictions-content">
+        {% for u in users %}
+        <div class="predictions-content-user">
+            <a href="{% url 'main:user' u.username %}" class="predictions-content-user-name">{{ u.username }}</a>
+            <div class="predictions-content-user-votings">
+                {% for v in u.vote_set.all %}
+                <div class="predictions-content-user-votings-item tooltip">
+                    <span class="tooltip-text">{{ v.entry.category.name }}: {{ v.entry.name }}</span>
+                    <img src="{{ v.entry.pic_url }}" alt="pic" class="predictions-content-user-votings-item-img">
+                </div>
+                {% empty %}
+                <div class="predictions-content-user-votings-empty">
+                    Has not voted yet!
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}
