@@ -1,0 +1,111 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="user">
+    <div class="user-content">
+        {% for c in categories %}
+        <div class="user-content-category">
+            <div class="user-content-category-name">
+                <div class="user-content-category-name-content">
+                    {{ c.name }}
+                </div>
+                <div class="user-content-category-name-loader">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <div class="user-content-category-entries">
+                {% for e in c.entry_set.all %}
+                <div class="user-content-category-entries-item tooltip"
+                    title="{{ e.name }}"
+                    data-id="{{ e.id }}"
+                    {% for v in e.vote_set.all %}
+                    {% if v.user == user and v.entry == e %}
+                    data-voted="voted"
+                    {% endif %}
+                    {% endfor %}
+                >
+                    <span class="tooltip-text">{{ e.name }}</span>
+                    <img src="{{ e.pic_url }}" alt="pic" class="user-content-category-entries-item-img">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{% csrf_token %}
+<script>
+    function getCsrf() {
+        var inputElems = document.querySelectorAll('input');
+        var csrfToken = '';
+        var i = 0;
+        for (i = 0; i < inputElems.length; i++) {
+            if (inputElems[i].name === 'csrfmiddlewaretoken') {
+                csrfToken = inputElems[i].value;
+                break;
+            }
+        }
+        return csrfToken;
+    }
+
+    function setupVotedItems() {
+        var entries = document.querySelectorAll('.user-content-category-entries-item-img');
+        var i = 0;
+        for (i = 0; i < entries.length; i++) {
+            if (entries[i].parentNode.dataset.voted === 'voted') {
+                entries[i].classList.add('modifier-win');
+            }
+        }
+    }
+
+    setupVotedItems();
+
+    function setupVotes() {
+        var entries = document.querySelectorAll('.user-content-category-entries-item-img');
+        var i = 0;
+        for (i = 0; i < entries.length; i++) {
+            entries[i].addEventListener('click', function (ev) {
+                var entryElem = ev.target.parentNode;
+                var entryId = entryElem.dataset.id;
+                var url = document.location.pathname;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('X-CSRFToken', getCsrf());
+                xhr.onreadystatechange = function () {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        var categoryLoaderElem = entryElem.parentNode.parentNode.querySelector('.user-content-category-name-loader');
+                        categoryLoaderElem.style.opacity = 1;
+                        if (this.status === 200) {
+                            var categoryItems = entryElem.parentNode.children;
+                            var i = 0;
+                            for (i = 0; i < categoryItems.length; i++) {
+                                if (categoryItems[i] != entryElem) {
+                                    categoryLoaderElem.style.opacity = 0;
+                                    categoryItems[i].children[1].classList.remove('modifier-win');
+                                } else {
+                                    categoryItems[i].children[1].classList.add('modifier-win');
+                                }
+                            }
+                        } else {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.error) {
+                                window.alert(response.message);
+                            }
+                        }
+                    }
+                };
+                var formData = new FormData();
+                formData.append('entry', entryId);
+                xhr.send(formData);
+            });
+        }
+    }
+
+    setupVotes();
+</script>
+{% endblock %}
