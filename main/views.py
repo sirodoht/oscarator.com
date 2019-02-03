@@ -1,7 +1,3 @@
-import json
-import re
-from urllib.parse import urlparse
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as dj_login, logout as dj_logout
 from django.contrib.auth.decorators import login_required
@@ -12,11 +8,8 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
-from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode
 from django.views.decorators.http import (
     require_http_methods,
@@ -35,7 +28,8 @@ INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
 def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
-    return render(request, "main/index.html")
+    users = User.objects.all()
+    return render(request, "main/index.html", {"users": users})
 
 
 @require_safe
@@ -175,3 +169,27 @@ def forgot_confirm(request, uidb64, token):
         return render(
             request, "main/forgot_confirm.html", {"form": form, "validlink": validlink}
         )
+
+
+@require_http_methods(["HEAD", "GET", "POST"])
+@login_required
+def user(request, username):
+    if request.method == "POST":
+        form = forms.VoteForm(request.POST)
+        if form.is_valid():
+            entry_id = form.cleaned_data.get("entry")
+            entry = models.Entry.objects.get(id=entry_id)
+            models.Vote.objects.filter(
+                entry__category=entry.category, user=request.user
+            ).delete()
+            models.Vote.objects.create(user=request.user, entry=entry)
+            return JsonResponse(status=200, data={})
+    else:
+        form = forms.VoteForm()
+    categories = models.Category.objects.filter(year=2019)
+    user_votes = models.Vote.objects.filter(user=request.user)
+    return render(
+        request,
+        "main/user.html",
+        {"form": form, "categories": categories, "user_votes": user_votes},
+    )
