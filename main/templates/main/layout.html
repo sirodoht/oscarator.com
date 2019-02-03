@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Share your Oscar predictions.">
+
+    <title>{% block title %}Oscarator{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+</head>
+<body>
+    {% if messages %}
+    <div class="alert">
+        {% for message in messages %}
+        <span{% if message.tags %} class="alert-{{ message.tags }}"{% endif %}>{{ message|safe }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <header>
+        <nav>
+            <div class="header-nav-item">Home</div>
+            <div class="header-nav-item">Your Predictions</div>
+        </nav>
+        <div class="header-title">OSCARATOR 2019</div>
+        <div class="header-down"></div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
