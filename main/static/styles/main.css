@@ -183,6 +183,16 @@ template {
 html,
 body {
     font-family: "Roboto", sans-serif;
+    color: #4a4a4a;
+}
+
+a {
+    text-decoration: none;
+    color: #b8a372;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 nav {
@@ -194,19 +204,103 @@ nav {
 
 .header-nav-item {
     color: #888;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.header-nav-item + .header-nav-item {
+    margin-left: 24px;
 }
 
 .header-title {
     color: #b8a372;
     font-size: 48px;
     font-weight: 300;
+    text-align: center;
+    margin-top: 37px;
+    margin-bottom: 32px;
 }
 
 .header-down {
-    margin-top: 56px;
+    padding-top: 56px;
     background: #efece3;
 }
 
-.results {
+.predictions {
     background: #f9f9f9;
+}
+
+.enter {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.enter-login {
+    width: 350px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.enter-register {
+    width: 350px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+h2 {
+    color: #d99a9a;
+    font-weight: 300;
+}
+
+label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-bottom: 3px;
+    color: #b8a372;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"] {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 1px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="url"]:disabled,
+input[type="password"]:disabled {
+    background: #eee;
+}
+
+input[type="submit"] {
+    background: #efece3;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 1px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    -webkit-appearance: none;
 }
