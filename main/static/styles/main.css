@@ -227,10 +227,6 @@ nav {
     background: #efece3;
 }
 
-.predictions {
-    background: #f9f9f9;
-}
-
 .enter {
     max-width: 800px;
     margin-left: auto;
@@ -303,4 +299,175 @@ textarea {
     border: 1px solid #ddd;
     box-sizing: border-box;
     -webkit-appearance: none;
+}
+
+.user {
+    background: #f9f9f9;
+}
+
+.user-content {
+    max-width: 800px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.user-content-category {
+    margin-bottom: 64px;
+}
+
+.user-content-category-name {
+    display: flex;
+}
+
+.user-content-category-name-content {
+    color: #b8a372;
+    text-transform: uppercase;
+    display: flex;
+}
+
+.user-content-category-name-loader {
+    display: flex;
+    margin-left: 10px;
+    transform: translateY(-2px);
+    opacity: 0;
+}
+
+.user-content-category-entries {
+    margin-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.user-content-category-entries-item {
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 50%;
+    width: 74px;
+    height: 74px;
+}
+
+.user-content-category-entries-item + .user-content-category-entries-item {
+    margin-left: 16px;
+}
+
+.user-content-category-entries-item-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 5px solid #efece3;
+    transition: 0.2s;
+}
+
+.user-content-category-entries-item-img:hover {
+    border-color: #ffd700;
+}
+
+.modifier-win {
+    border-color: #ffd700;
+}
+
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+}
+
+.loader {
+    border-top: 3px solid  #efece3;
+    border-right: 3px solid  #efece3;
+    border-bottom: 3px solid  #efece3;
+    border-left: 3px solid #b8a372;
+    animation: loading 0.9s infinite linear;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    background-color: #353232;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 3px;
+    padding: 8px 4px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    width: 160px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -80px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
+.predictions {
+    background: #f9f9f9;
+}
+
+.predictions-content {
+    max-width: 800px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 64px;
+    grid-row-gap: 64px;
+}
+
+.predictions-content-user-name {
+    color: #d99a9a;
+    text-transform: uppercase;
+}
+
+.predictions-content-user-votings {
+    margin-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.predictions-content-user-votings-empty {
+    color: #b8a372;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.predictions-content-user-votings-item {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+.predictions-content-user-votings-item + .predictions-content-user-votings-item {
+    margin-left: 12px;
+}
+
+.predictions-content-user-votings-item-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
 }
