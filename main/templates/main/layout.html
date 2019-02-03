@@ -24,8 +24,8 @@
 
     <header>
         <nav>
-            <div class="header-nav-item">Home</div>
-            <div class="header-nav-item">Your Predictions</div>
+            <a href="{% url 'main:index' %}" class="header-nav-item">Home</a>
+            <a href="{% url 'main:index' %}" class="header-nav-item">Predictions of @{{ request.user.username }}</a>
         </nav>
         <div class="header-title">OSCARATOR 2019</div>
         <div class="header-down"></div>
