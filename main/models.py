@@ -46,7 +46,7 @@ class Entry(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=600)
     pic_url = models.CharField(max_length=1000)
-    imdb = models.CharField(max_length=200)
+    imdb = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.name

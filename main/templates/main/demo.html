@@ -1,0 +1,345 @@
+<bls-nominees-list text-representation="nomineeslist.textRepresentation" ng-repeat="(categoryKey, category) in nomineeslist.categories"
+    category-key="categoryKey" nominees="category" id="nominees-category-best-picture" bls-scroll-history-element="{&quot;name&quot;:&quot;nominees.landing.category&quot;,&quot;params&quot;:{&quot;categorySlug&quot;:&quot;best-picture&quot;}}"
+    bls-scroll-history-meta="{&quot;metatags&quot;:{&quot;title&quot;:&quot;Best Picture - Oscar Nominees 2019&quot;,&quot;description&quot;:&quot;See the list of Best Picture nominees for Oscars 2019. Get the full list of Oscar nominations, view photos and videos for the 91st Academy Awards.&quot;,&quot;categoryName&quot;:&quot;Best Picture&quot;}}"
+    show-ad="false" class="ng-scope ng-isolate-scope">
+    <section class="nominees-section nominees-section-tier1" ng-class="{ 'nominees__category--text-based': textRepresentation }">
+        <h2 class="category-title ng-binding">Best Picture</h2>
+        <div class="hideable">
+            <!-- ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/black-panther"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:black-panther:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07134409/e0e0b612a16885b02848f38ead529fffaed84d06d9651396218a2515a73ea823-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07134409/e0e0b612a16885b02848f38ead529fffaed84d06d9651396218a2515a73ea823-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/black-panther"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:black-panther:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/black-panther" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:black-panther:more info'}">Black
+                                        Panther</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Kevin
+                                        Feige
+
+                                    </h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/black-panther" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:black-panther:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/blackkklansman"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:blackkklansman:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07134511/d4da934ee889ec689de327d3bb00e77d7dbe1dcc89854f6a9aebf09c328c9e3d-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07134511/d4da934ee889ec689de327d3bb00e77d7dbe1dcc89854f6a9aebf09c328c9e3d-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/blackkklansman"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:blackkklansman:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/blackkklansman" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:blackkklansman:more info'}">BlacKkKlansman</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Sean
+                                        McKittrick, Jason Blum, Raymond Mansfield, Jordan Peele and Spike…</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/blackkklansman" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:blackkklansman:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/bohemian-rhapsody"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:bohemian-rhapsody:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07134643/49fdf0f255865e709db8675c548860a8999e339e78d7d2f8b7131c84e766c7eb-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07134643/49fdf0f255865e709db8675c548860a8999e339e78d7d2f8b7131c84e766c7eb-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/bohemian-rhapsody"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:bohemian-rhapsody:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/bohemian-rhapsody" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:bohemian-rhapsody:more info'}">Bohemian
+                                        Rhapsody</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Graham
+                                        King
+
+                                    </h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/bohemian-rhapsody" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:bohemian-rhapsody:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/the-favourite"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:the-favourite:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07143705/266f9495ce8222ac9ade5f970201bfe4b0cc0ea9f5c017e0fa69d993264d5609-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07143705/266f9495ce8222ac9ade5f970201bfe4b0cc0ea9f5c017e0fa69d993264d5609-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/the-favourite"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:the-favourite:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/the-favourite" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:the-favourite:more info'}">The
+                                        Favourite</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Ceci
+                                        Dempsey, Ed Guiney, Lee Magiday and Yorgos Lanthimos
+
+
+                                    </h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/the-favourite" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:the-favourite:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/green-book"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:green-book:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07140724/9fbd79d3251cfae53a4ee13026e016d6ab4e8f1f3d81a6a2eaceba0dabac3333-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07140724/9fbd79d3251cfae53a4ee13026e016d6ab4e8f1f3d81a6a2eaceba0dabac3333-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/green-book"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:green-book:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/green-book" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:green-book:more info'}">Green
+                                        Book</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Jim
+                                        Burke, Charles B. Wessler, Brian Currie, Peter Farrelly and Nick…</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/green-book" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:green-book:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/roma"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:roma:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07115901/7efdf047cbd57d9ee454a724b9ebe4ce0bd6780326d8685849ec8bfe39200192-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07115901/7efdf047cbd57d9ee454a724b9ebe4ce0bd6780326d8685849ec8bfe39200192-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/roma"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:roma:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/roma" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:roma:more info'}">Roma</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Gabriela
+                                        Rodríguez and Alfonso Cuarón
+
+
+
+                                    </h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/roma" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:roma:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/a-star-is-born"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:a-star-is-born:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07132442/8207ba86b0560820430f4ec397eb4b8eb6818babf948ed57dd5a887b19d57de5-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07132442/8207ba86b0560820430f4ec397eb4b8eb6818babf948ed57dd5a887b19d57de5-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/a-star-is-born"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:a-star-is-born:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/a-star-is-born" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:a-star-is-born:more info'}">A
+                                        Star Is Born</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Bill
+                                        Gerber, Bradley Cooper and Lynette Howell Taylor
+
+
+
+                                    </h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/a-star-is-born" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:a-star-is-born:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: !textRepresentation -->
+            <div ng-if="!textRepresentation" class="nominee-slick-entry ng-scope" ng-class="::{winner: nominee.winner}"
+                ng-repeat="nominee in nominees.result track by $index">
+                <div class="nominee-block"> <a class="nominee-image-wrapper" href="/nominees/best-picture/vice"
+                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:vice:more info'}">
+                        <div class="nominee-image-internal-wrapper">
+                            <!-- ngIf: nominee.featured_image --><img ng-if="nominee.featured_image"
+                                bls-remove-broken-image="" bls-lazy-load="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07145515/60cd9d00078eb2b91bb56b1a2577cebd7c6c26ab2c48394bd758991c7515543c-370x492.jpg"
+                                class="ng-scope" src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2019/01/07145515/60cd9d00078eb2b91bb56b1a2577cebd7c6c26ab2c48394bd758991c7515543c-370x492.jpg"><!-- end ngIf: nominee.featured_image -->
+                            <!-- ngIf: !nominee.featured_image -->
+                        </div>
+                    </a>
+                    <div class="nominee-hover-overlay"> <a class="nominee-overlay-link" href="/nominees/best-picture/vice"
+                            bls-analytics-click="{linkName: 'oscars:nominees:best-picture:vice:more info'}"></a>
+                        <div class="nominee-hover-table">
+                            <div>
+                                <div class="nominee-meta-top"> <a href="/nominees/best-picture/vice" class="nominee-title ng-binding"
+                                        bls-analytics-click="{linkName: 'oscars:nominees:best-picture:vice:more info'}">Vice</a>
+                                    <h4 ng-hide="ipad &amp;&amp; nominee.post_title.length > ipadTitleBreak" class="ng-binding">Dede
+                                        Gardner, Jeremy Kleiner, Adam McKay and Kevin Messick
+
+
+
+                                    </h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="nominee-meta-bottom">
+                                    <!-- ngIf: nominee.video[0].href --><a ng-click="viewTrailer(nominee, nominees.category_slug)"
+                                        ng-if="nominee.video[0].href" class="cta cta-left button--border-rotated clickable ng-scope">
+                                        View Trailer </a><!-- end ngIf: nominee.video[0].href --> <a class="cta cta-right button--border-rotated"
+                                        href="/nominees/best-picture/vice" bls-analytics-click="{linkName: 'oscars:nominees:best-picture:vice:more info'}">More
+                                        Info</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end ngIf: !textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+            <!-- ngIf: textRepresentation -->
+            <!-- end ngRepeat: nominee in nominees.result track by $index -->
+        </div> <!-- ngIf: showAd -->
+    </section>
+    <bls-trailer-lightbox nominee="trailerNominee" opened="trailerOpened" playlist="nomineesWithTrailer" on-close="trailerOnClose()"
+        class="ng-isolate-scope">
+        <div class="nominee-trailer-overlay-wrapper ng-hide" ng-show="opened">
+            <div class="overlay-mask"> </div>
+            <div class="nominee-trailer-overlay">
+                <div class="overlay-horizon">
+                    <div class="inner-t">
+                        <!-- ngIf: opened -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </bls-trailer-lightbox>
+</bls-nominees-list>
