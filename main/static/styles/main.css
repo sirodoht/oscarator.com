@@ -477,3 +477,10 @@ textarea {
     color: #d99a9a;
     padding: 8px;
 }
+
+.cta {
+    text-align: center;
+    color: #d99a9a;
+    padding: 32px;
+    font-size: 22px;
+}

@@ -37,6 +37,12 @@
         <div class="header-down"></div>
     </header>
 
+    {% if not request.user.vote_set.all %}
+    <div class="cta">
+        Choose your Oscar Predictions <a href="{% url 'main:user' request.user %}">here</a>!
+    </div>
+    {% endif %}
+
     {% block content %}
     {% endblock %}
 
