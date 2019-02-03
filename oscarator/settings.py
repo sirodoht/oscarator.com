@@ -51,7 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "main.middleware.AnalyticsMiddleware",
+    "main.middleware.AnalyticsMiddleware",
 ]
 
 ROOT_URLCONF = "oscarator.urls"
