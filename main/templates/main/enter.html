@@ -1,0 +1,36 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="enter">
+    <form action="{% url 'main:login' %}" method="post" class="enter-login">
+        <h2>Log in</h2>
+
+        {{ login_form }}
+
+        {% csrf_token %}
+        <input type="submit" value="Log in">
+
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <div style="margin-top: 64px;">
+            <a href="{% url 'main:forgot' %}">Forgot password?</a>
+        </div>
+    </form>
+    <form action="{% url 'main:join' %}" method="post" class="enter-register">
+        <h2>Join</h2>
+        <label for="id_username">Username*</label>
+        <input type="text" name="username" required id="id_username">
+
+        <label for="id_password">Password*</label>
+        <input type="password" name="password" required id="id_password">
+
+        <label for="id_email">Email</label>
+        <input type="email" name="email" id="id_email">
+
+        {% csrf_token %}
+        <input type="submit" value="Join">
+    </form>
+</section>
+{% endblock %}
