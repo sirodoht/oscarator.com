@@ -359,6 +359,7 @@ textarea {
     height: 64px;
     border-radius: 50%;
     border: 5px solid #efece3;
+    object-fit: cover;
     transition: 0.2s;
 }
 
@@ -470,6 +471,7 @@ textarea {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .alert {
