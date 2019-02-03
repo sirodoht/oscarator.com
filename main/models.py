@@ -32,3 +32,33 @@ class Analytic(models.Model):
 
     def __str__(self):
         return self.ip
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=600)
+    year = models.PositiveSmallIntegerField(default=timezone.now().year)
+
+    def __str__(self):
+        return self.name
+
+
+class Entry(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=600)
+    pic_url = models.CharField(max_length=1000)
+    imdb = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class Vote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = (("user", "entry"),)
+
+    def __str__(self):
+        return self.entry.name + " - " + self.user.username
