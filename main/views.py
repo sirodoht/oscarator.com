@@ -28,7 +28,7 @@ INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
 def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
-    users = User.objects.all()
+    users = User.objects.all().order_by("?")
     return render(request, "main/index.html", {"users": users})
 
 
