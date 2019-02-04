@@ -30,7 +30,7 @@
             {% endif %}
         </nav>
         {% if "@" in request.path %}
-        <div class="header-title">Predictions of {{ request.user.username }}</div>
+        <div class="header-title">Predictions of {{ user.username }}</div>
         {% else %}
         <div class="header-title">OSCARATOR 2019</div>
         {% endif %}
