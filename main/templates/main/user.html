@@ -40,6 +40,9 @@
 {% block scripts %}
 {% csrf_token %}
 <script>
+    var userAccount = "{{ request.user.username }}";
+    var userPage = "{{ user.username }}";
+
     function getCsrf() {
         var inputElems = document.querySelectorAll('input');
         var csrfToken = '';
@@ -106,6 +109,18 @@
         }
     }
 
-    setupVotes();
+    function makeVotingUnclickable() {
+        var entryElems = document.querySelectorAll('.user-content-category-entries-item');
+        var i = 0;
+        for (i = 0; i < entryElems.length; i++) {
+            entryElems[i].style.cursor = 'auto';
+        }
+    }
+
+    if (userAccount === userPage) {
+        setupVotes();
+    } else {
+        makeVotingUnclickable();
+    }
 </script>
 {% endblock %}
