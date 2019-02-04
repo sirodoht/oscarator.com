@@ -3,6 +3,12 @@
 {% load static %}
 
 {% block content %}
+{% if request.user.is_authenticated and not request.user.vote_set.all %}
+<div class="cta">
+    Choose your Oscar Predictions <a href="{% url 'main:user' request.user %}">here</a>!
+</div>
+{% endif %}
+
 <section class="predictions">
     <div class="predictions-content">
         {% for u in users %}
