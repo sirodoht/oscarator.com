@@ -436,8 +436,8 @@ textarea {
     padding-bottom: 64px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 64px;
-    grid-row-gap: 64px;
+    grid-column-gap: 48px;
+    grid-row-gap: 48px;
 }
 
 .predictions-content-user-name {
@@ -447,8 +447,6 @@ textarea {
 
 .predictions-content-user-votings {
     margin-top: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
 }
 
 .predictions-content-user-votings-empty {
@@ -461,10 +459,8 @@ textarea {
     width: 64px;
     height: 64px;
     border-radius: 50%;
-}
-
-.predictions-content-user-votings-item + .predictions-content-user-votings-item {
-    margin-left: 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 .predictions-content-user-votings-item-img {
