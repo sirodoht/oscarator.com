@@ -187,9 +187,9 @@ def user(request, username):
     else:
         form = forms.VoteForm()
     categories = models.Category.objects.filter(year=2019)
-    user_votes = models.Vote.objects.filter(user=request.user)
+    user = User.objects.get(username=username)
     return render(
         request,
         "main/user.html",
-        {"form": form, "categories": categories, "user_votes": user_votes},
+        {"form": form, "categories": categories, "user": user},
     )
