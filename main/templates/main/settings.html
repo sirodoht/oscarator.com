@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="settings">
+    <form action="{% url 'main:settings' %}" method="post" class="settings-password">
+        <h2>Change password</h2>
+
+        {{ form }}
+
+        {% csrf_token %}
+        <input type="submit" value="Change password">
+    </form>
+</section>
+{% endblock %}

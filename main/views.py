@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login as dj_login, logout as dj_lo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
     AuthenticationForm,
+    PasswordChangeForm,
     PasswordResetForm,
     SetPasswordForm,
 )
@@ -193,3 +194,19 @@ def user(request, username):
         "main/user.html",
         {"form": form, "categories": categories, "user": user},
     )
+
+
+@require_http_methods(["HEAD", "GET", "POST"])
+@login_required
+def settings(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, "Your password was successfully updated!")
+            return redirect("main:index")
+        else:
+            messages.error(request, "Please correct the error below.")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "main/settings.html", {"form": form})
