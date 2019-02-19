@@ -198,11 +198,11 @@ def user(request, username):
 
 @require_http_methods(["HEAD", "GET", "POST"])
 @login_required
-def settings(request):
+def preferences(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             messages.success(request, "Your password was successfully updated!")
             return redirect("main:index")
         else:
