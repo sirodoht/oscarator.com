@@ -1,0 +1,43 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="enter">
+    <div style="width: 350px; padding-left: 8px; padding-right: 8px;">
+        <h2>Set new password</h2>
+
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert-error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert-error">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if validlink %}
+        <form method="post">
+            {{ form.new_password1.errors }}
+            <label for="id_new_password1">New password</label>
+            {{ form.new_password1 }}
+            {{ form.new_password2.errors }}
+            <label for="id_new_password2">Confirm password</label>
+            {{ form.new_password2 }}
+            {% csrf_token %}
+            <input type="submit" value="Change my password">
+        </form>
+        {% else %}
+        {% if not form.errors %}
+        <p>The password reset link was invalid, possibly because it has already been used.  Please request a new password reset.</p>
+        {% endif %}
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

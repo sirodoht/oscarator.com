@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="enter">
+    <form action="{% url 'main:forgot' %}" method="post" class="enter-login">
+        <h2>Reset password</h2>
+
+        {{ form }}
+
+        {% csrf_token %}
+        <input type="submit" value="Send password reset link">
+    </form>
+</section>
+{% endblock %}
