@@ -30,7 +30,18 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
     users = User.objects.all().order_by("?")
-    return render(request, "main/index.html", {"users": users})
+
+    # calculate all users successful predictions
+    user_wins = {}
+    for u in users:
+        user_wins[u.username] = 0
+    for u in users:
+        votes = models.Vote.objects.filter(user=u)
+        for v in votes:
+            if v.entry.is_winner:
+                user_wins[u.username] += 1
+
+    return render(request, "main/index.html", {"users": users, "user_wins": user_wins})
 
 
 @require_safe

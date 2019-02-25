@@ -9,16 +9,42 @@
 </div>
 {% endif %}
 
+<section class="results">
+    <div class="results-content">
+        <h2>Results</h2>
+        <div class="results-content-grid">
+            {% for user, win_number in user_wins.items|dictsort:"0.lower" %}
+            <a href="{% url 'main:user' user %}" class="results-content-grid-user">
+                <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="32px" class="results-content-grid-user-img">
+                {{ user }}
+            </a>
+            <div class="results-content-grid-wins">{{ win_number }}</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <section class="predictions">
     <div class="predictions-content">
         {% for u in users %}
         <div class="predictions-content-user">
-            <a href="{% url 'main:user' u.username %}" class="predictions-content-user-name">{{ u.username }}</a>
+            <a href="{% url 'main:user' u.username %}" class="predictions-content-user-name">
+                {{ u.username }}
+                <span class="predictions-content-user-name-wins">
+                    {% for user, win_number in user_wins.items %}
+                    {% if user == u.username %}
+                    - {{ win_number }}&nbsp;wins
+                    {% endif %}
+                    {% endfor %}
+                </span>
+            </a>
             <div class="predictions-content-user-votings">
                 {% for v in u.vote_set.all %}
                 <div class="predictions-content-user-votings-item tooltip">
                     <span class="tooltip-text">{{ v.entry.category.name }}: {{ v.entry.name }}</span>
-                    <img src="{{ v.entry.pic_url }}" alt="pic" class="predictions-content-user-votings-item-img">
+                    <img src="{{ v.entry.pic_url }}" alt="pic"
+                        class="predictions-content-user-votings-item-img {% if v.entry.is_winner %}modifier-win{% endif %}"
+                    >
                 </div>
                 {% empty %}
                 <div class="predictions-content-user-votings-empty">
@@ -30,4 +56,18 @@
         {% endfor %}
     </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var trophyElems = document.querySelectorAll('.results-content-grid-user-img');
+    var i = 0;
+    for (i = 0; i < trophyElems.length; i++) {
+        if (i === 0) {
+            trophyElems[i].style.opacity = 1;
+        } else {
+            trophyElems[i].remove();
+        }
+    }
+</script>
 {% endblock %}

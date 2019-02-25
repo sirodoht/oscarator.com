@@ -315,6 +315,28 @@ textarea {
     padding-bottom: 64px;
 }
 
+.user-content-results {
+    color: #b8a372;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 64px;
+}
+
+.user-content-results-circle {
+    width: 128px;
+    height: 128px;
+    border: 1px solid #b8a372;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+
+.user-content-results-circle span {
+    font-size: 200%;
+    font-weight: 600;
+}
+
 .user-content-category {
     margin-bottom: 64px;
 }
@@ -365,7 +387,7 @@ textarea {
 }
 
 .modifier-win {
-    border-color: #ffd700;
+    border-color: #ffd700 !important;
 }
 
 .loader,
@@ -442,6 +464,11 @@ textarea {
     text-transform: uppercase;
 }
 
+.predictions-content-user-name-wins {
+    color: #b8a372;
+    text-transform: lowercase;
+}
+
 .predictions-content-user-votings {
     margin-top: 16px;
 }
@@ -465,6 +492,59 @@ textarea {
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
+    border: 5px solid #efece3;
+}
+
+.results {
+    background: #fff;
+}
+
+.results-content {
+    max-width: 800px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    text-align: center;
+}
+
+.results-content h2 {
+    margin-top: 0;
+    margin-bottom: 32px;
+    font-size: 32px;
+    color: #b8a372;
+    text-transform: uppercase;
+}
+
+.results-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+}
+
+.results-content-grid-user {
+    color: #d99a9a;
+    text-align: right;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.results-content-grid-user-img {
+    margin-right: 16px;
+    opacity: 0;
+}
+
+.results-content-grid-wins {
+    text-align: left;
+    color: #b8a372;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .alert {
