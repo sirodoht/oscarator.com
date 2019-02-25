@@ -50,20 +50,17 @@ def index(request):
 
             # find max
             max_value = max(values_de)
-            print("max_value:", max_value)
 
             if max_value == v:
                 user_wins.append({
                     k: v,
                 })
                 values_de[values_de.index(max_value)] = 0
-                print(user_wins)
 
-    for k in range(len(user_wins)):
-        for i in range(len(user_wins) - 1):
-            if user_wins[i] == user_wins[i+1]:
-                del user_wins[i+1]
-                break
+    for i in user_wins:
+        key = list(i.keys())[0]
+        if i[key] == 0:
+            del i[key]
 
     return render(request, "main/index.html", {"users": users, "user_wins": user_wins})
 
