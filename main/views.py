@@ -190,10 +190,19 @@ def user(request, username):
         form = forms.VoteForm()
     categories = models.Category.objects.filter(year=2019)
     user = User.objects.get(username=username)
+
+    # calculate user successful predictions
+    user_wins = 0
+    for c in categories:
+        for e in c.entry_set.all():
+            for v in e.vote_set.all():
+                if v.user == user and v.entry == e and v.entry.is_winner:
+                    user_wins += 1
+
     return render(
         request,
         "main/user.html",
-        {"form": form, "categories": categories, "user": user},
+        {"form": form, "categories": categories, "user": user, "user_wins": user_wins},
     )
 
 

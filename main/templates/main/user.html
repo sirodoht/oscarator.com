@@ -5,11 +5,25 @@
 {% block content %}
 <section class="user">
     <div class="user-content">
+        <div class="user-content-results">
+            <div class="user-content-results-circle">
+                <br>
+                Correct predictions
+                <br><span>{{ user_wins }}</span>
+            </div>
+        </div>
         {% for c in categories %}
         <div class="user-content-category">
             <div class="user-content-category-name">
                 <div class="user-content-category-name-content">
                     {{ c.name }}
+                    {% for e in c.entry_set.all %}
+                        {% for v in e.vote_set.all %}
+                        {% if v.user == user and v.entry == e and v.entry.is_winner %}
+                        <img src="{% static 'images/oscar-trophy.svg' %}" alt="oscar trophy icon" height="32px" style="margin-left: 8px; transform: translateY(-8px);">
+                        {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                 </div>
                 <div class="user-content-category-name-loader">
                     <div class="loader"></div>
