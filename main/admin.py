@@ -29,6 +29,14 @@ class AnalyticAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Analytic, AnalyticAdmin)
 
+
+# Entry
+class EntryAdmin(admin.ModelAdmin):
+    list_display = ("name", "category", "is_winner", "imdb", "id")
+
+
+admin.site.register(models.Entry, EntryAdmin)
+
+
 admin.site.register(models.Category)
-admin.site.register(models.Entry)
 admin.site.register(models.Vote)
