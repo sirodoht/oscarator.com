@@ -13,12 +13,14 @@
     <div class="results-content">
         <h2>Results</h2>
         <div class="results-content-grid">
-            {% for user, win_number in user_wins.items|dictsort:"0.lower" %}
+            {% for thing in user_wins %}
+            {% for user, wins in thing.items %}
             <a href="{% url 'main:user' user %}" class="results-content-grid-user">
                 <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="32px" class="results-content-grid-user-img">
                 {{ user }}
             </a>
-            <div class="results-content-grid-wins">{{ win_number }}</div>
+            <div class="results-content-grid-wins">{{ wins }}</div>
+            {% endfor %}
             {% endfor %}
         </div>
     </div>
