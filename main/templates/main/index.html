@@ -3,28 +3,28 @@
 {% load static %}
 
 {% block content %}
-{% if request.user.is_authenticated and not request.user.vote_set.all %}
+{% if request.user.is_authenticated and not user_vote_complete %}
 <div class="cta">
-    Choose your Oscar Predictions <a href="{% url 'main:user' request.user %}">here</a>!
+    <a href="{% url 'main:user' request.user %}">Make your picks &rarr;</a>
 </div>
 {% endif %}
 
-<section class="results">
+<!-- <section class="results">
     <div class="results-content">
         <h2>Results</h2>
         <div class="results-content-grid">
             {% for thing in user_wins %}
-            {% for user, wins in thing.items %}
-            <a href="{% url 'main:user' user %}" class="results-content-grid-user">
-                <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="32px" class="results-content-grid-user-img">
-                {{ user }}
-            </a>
-            <div class="results-content-grid-wins">{{ wins }}</div>
-            {% endfor %}
+                {% for user, wins in thing.items %}
+                <a href="{% url 'main:user' user %}" class="results-content-grid-user">
+                    <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="32px" class="results-content-grid-user-img">
+                    {{ user }}
+                </a>
+                <div class="results-content-grid-wins">{{ wins }}</div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="predictions">
     <div class="predictions-title">
