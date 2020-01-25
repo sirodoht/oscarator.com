@@ -31,24 +31,47 @@
         Contestants
     </div>
     <div class="predictions-content">
-        {% for u in users %}
+        <!-- {% for u in users %}
         <div class="predictions-content-user">
             <a href="{% url 'main:user' u.username %}" class="predictions-content-user-name">
                 {{ u.username }}
                 <span class="predictions-content-user-name-wins">
                     {% for user, win_number in user_wins.items %}
-                    {% if user == u.username %}
-                    - {{ win_number }}&nbsp;wins
-                    {% endif %}
+                        {% if user == u.username %}
+                        - {{ win_number }}&nbsp;wins
+                        {% endif %}
                     {% endfor %}
                 </span>
             </a>
             <div class="predictions-content-user-votings">
                 {% for v in u.vote_set.all %}
+                {% if v.entry__year == 2020 %}
                 <div class="predictions-content-user-votings-item tooltip">
                     <span class="tooltip-text">{{ v.entry.category.name }}: {{ v.entry.name }}</span>
                     <img src="{{ v.entry.pic_url }}" alt="pic"
                         class="predictions-content-user-votings-item-img {% if v.entry.is_winner %}modifier-win{% endif %}"
+                    >
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="predictions-content-user-votings-empty">
+                    Hasn't voted yet!
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %} -->
+        {% for username, entries in all_users_entries.items %}
+        <div class="predictions-content-user">
+            <a href="{% url 'main:user' username %}" class="predictions-content-user-name">
+                {{ username }}
+            </a>
+            <div class="predictions-content-user-votings">
+                {% for e in entries %}
+                <div class="predictions-content-user-votings-item tooltip">
+                    <span class="tooltip-text">{{ e.category.name }}: {{ e.name }}</span>
+                    <img src="{{ e.pic_url }}" alt="pic"
+                        class="predictions-content-user-votings-item-img {% if e.is_winner %}modifier-win{% endif %}"
                     >
                 </div>
                 {% empty %}

@@ -29,40 +29,61 @@ INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
 def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
+
+    # find if user has voted for all categories
+    user_vote_complete = (
+        models.Vote.objects.filter(user=request.user, entry__year=2020).count()
+        == models.Vote.objects.all().count()
+    )
+
+    # build all users' entries dict
+    all_users_entries = {}
     users = User.objects.all().order_by("?")
+    for u in users:
+        all_users_entries[u.username] = []
+    votes = models.Vote.objects.filter(entry__year=2020)
+    for v in votes:
+        all_users_entries[v.user.username].append(v.entry)
 
     # calculate all users successful predictions
-    user_wins_dict = {}
-    for u in users:
-        user_wins_dict[u.username] = 0
-    for u in users:
-        votes = models.Vote.objects.filter(user=u)
-        for v in votes:
-            if v.entry.is_winner:
-                user_wins_dict[u.username] += 1
+    # user_wins_dict = {}
+    # for u in users:
+    #     user_wins_dict[u.username] = 0
+    # for u in users:
+    #     votes = models.Vote.objects.filter(user=u)
+    #     for v in votes:
+    #         if v.entry.is_winner:
+    #             user_wins_dict[u.username] += 1
 
     user_wins = []
-    values = user_wins_dict.values()
-    lim = len(values)
-    values_de = list(values)
-    for i in range(lim):
-        for k, v in user_wins_dict.items():
+    # values = user_wins_dict.values()
+    # lim = len(values)
+    # values_de = list(values)
+    # for i in range(lim):
+    #     for k, v in user_wins_dict.items():
 
-            # find max
-            max_value = max(values_de)
+    #         # find max
+    #         max_value = max(values_de)
 
-            if max_value == v:
-                user_wins.append({
-                    k: v,
-                })
-                values_de[values_de.index(max_value)] = 0
+    #         if max_value == v:
+    #             user_wins.append({k: v})
+    #             values_de[values_de.index(max_value)] = 0
 
-    for i in user_wins:
-        key = list(i.keys())[0]
-        if i[key] == 0:
-            del i[key]
+    # for i in user_wins:
+    #     key = list(i.keys())[0]
+    #     if i[key] == 0:
+    #         del i[key]
 
-    return render(request, "main/index.html", {"users": users, "user_wins": user_wins})
+    return render(
+        request,
+        "main/index.html",
+        {
+            "users": users,
+            "user_wins": user_wins,
+            "all_users_entries": all_users_entries,
+            "user_vote_complete": user_vote_complete,
+        },
+    )
 
 
 @require_safe
