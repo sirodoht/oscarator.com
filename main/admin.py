@@ -32,11 +32,23 @@ admin.site.register(models.Analytic, AnalyticAdmin)
 
 # Entry
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ("name", "category", "is_winner", "imdb", "id")
+    list_display = ("name", "year", "category", "is_winner", "imdb", "id")
 
 
 admin.site.register(models.Entry, EntryAdmin)
 
 
-admin.site.register(models.Category)
-admin.site.register(models.Vote)
+# Category
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+
+admin.site.register(models.Category, CategoryAdmin)
+
+
+# Vote
+class VoteAdmin(admin.ModelAdmin):
+    list_display = ("user", "entry", "created_at")
+
+
+admin.site.register(models.Vote, VoteAdmin)
