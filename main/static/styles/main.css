@@ -214,12 +214,17 @@ nav {
 }
 
 .header-title {
+    display: block;
     color: #b8a372;
     font-size: 48px;
     font-weight: 300;
     text-align: center;
     margin-top: 37px;
     margin-bottom: 32px;
+}
+
+.header-title:hover {
+    text-decoration: none;
 }
 
 .header-down {
@@ -358,6 +363,13 @@ textarea {
     opacity: 0;
 }
 
+.user-content-category-name-saved {
+    display: flex;
+    margin-left: 10px;
+    color: #2d9517;
+    opacity: 0;
+}
+
 .user-content-category-entries {
     margin-top: 16px;
     padding-left: 16px;
@@ -456,7 +468,11 @@ textarea {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 48px;
-    grid-row-gap: 48px;
+    grid-row-gap: 64px;
+}
+
+.predictions-content-user {
+    text-align: center;
 }
 
 .predictions-content-user-name {
@@ -471,12 +487,14 @@ textarea {
 
 .predictions-content-user-votings {
     margin-top: 16px;
+    text-align: left;
 }
 
 .predictions-content-user-votings-empty {
     color: #b8a372;
     font-size: 14px;
     opacity: 0.5;
+    text-align: center;
 }
 
 .predictions-content-user-votings-item {
@@ -556,8 +574,8 @@ textarea {
 .cta {
     text-align: center;
     color: #d99a9a;
-    padding: 32px;
-    font-size: 22px;
+    padding: 64px;
+    font-size: 28px;
 }
 
 .settings {
