@@ -40,7 +40,7 @@ admin.site.register(models.Entry, EntryAdmin)
 
 # Category
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name",)
+    list_display = ("name", "id")
 
 
 admin.site.register(models.Category, CategoryAdmin)
