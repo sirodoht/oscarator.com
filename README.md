@@ -1,22 +1,20 @@
 # oscarator.com
 
-> Share your Oscar predictions
+> Share your Oscar predictions.
 
 ## Development
 
-This is a [Django](https://www.djangoproject.com/) codebase. Check out the 
-[Django docs](https://docs.djangoproject.com/) for general technical documentation.
+This is a [Django](https://www.djangoproject.com/) codebase. Check out the [Django docs](https://docs.djangoproject.com/) for general technical documentation.
 
 ### Structure
 
-The Django project is [`oscarator`](/oscarator). There is one Django app, [`main`](/main) Django app,
-with all business logic.
+The Django project is [`oscarator`](/oscarator). There is one Django app, [`main`](/main) Django app, with all business logic.
 
 ### Dependencies
 
 Create virtualenv, enable it and then install requirements:
 ```sh
-virtualenv -p python3 venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
