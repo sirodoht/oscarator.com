@@ -356,13 +356,6 @@ textarea {
     display: flex;
 }
 
-.user-content-category-name-loader {
-    display: flex;
-    margin-left: 10px;
-    transform: translateY(-2px);
-    opacity: 0;
-}
-
 .user-content-category-name-saved {
     display: flex;
     margin-left: 10px;

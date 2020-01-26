@@ -28,9 +28,6 @@
                 <div class="user-content-category-name-content">
                     {{ category_name }}
                 </div>
-                <div class="user-content-category-name-loader">
-                    <div class="loader"></div>
-                </div>
                 <div class="user-content-category-name-saved" data-category={{ c.id }}>
                     saved ✔️
                 </div>
@@ -101,8 +98,6 @@
                 xhr.setRequestHeader('X-CSRFToken', getCsrf());
                 xhr.onreadystatechange = function () {
                     if (this.readyState === XMLHttpRequest.DONE) {
-                        var categoryLoaderElem = entryElem.parentNode.parentNode.querySelector('.user-content-category-name-loader');
-                        categoryLoaderElem.style.opacity = 1;
                         if (this.status === 200) {
                             // show saved div
                             var savedDiv = entryElem.parentNode.parentNode.querySelector('.user-content-category-name-saved');
@@ -116,7 +111,6 @@
                             var i = 0;
                             for (i = 0; i < categoryItems.length; i++) {
                                 if (categoryItems[i] != entryElem) {
-                                    categoryLoaderElem.style.opacity = 0;
                                     categoryItems[i].children[1].classList.remove('modifier-win');
                                 } else {
                                     categoryItems[i].children[1].classList.add('modifier-win');
