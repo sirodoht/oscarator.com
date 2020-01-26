@@ -47,7 +47,7 @@
                     {% endfor %}
                 >
                     <span class="tooltip-text">{{ e.name }}</span>
-                    <img src="/entries/{{ e.year }}/{% static  e.pic_url %}" alt="pic" class="user-content-category-entries-item-img">
+                    <img src="{% static e.pic_url %}" alt="pic" class="user-content-category-entries-item-img">
                 </div>
                 {% endfor %}
             </div>
