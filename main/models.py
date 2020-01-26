@@ -47,7 +47,7 @@ class Entry(models.Model):
     pic_url = models.CharField(max_length=1000)
     imdb = models.CharField(max_length=200, null=True, blank=True)
     is_winner = models.BooleanField(default=False)
-    year = models.PositiveSmallIntegerField()
+    year = models.PositiveSmallIntegerField(default=2020)
 
     def __str__(self):
         return self.name
