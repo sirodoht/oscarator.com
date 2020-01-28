@@ -30,11 +30,7 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
 
-    # find if user has voted for all categories
-    user_vote_complete = (
-        models.Vote.objects.filter(user=request.user, entry__year=2020).count()
-        == models.Vote.objects.all().count()
-    )
+    user_vote_count = models.Vote.objects.filter(user=request.user, entry__year=2020).count()
 
     # build all users' entries dict
     all_users_entries = {}
@@ -81,7 +77,7 @@ def index(request):
             "users": users,
             "user_wins": user_wins,
             "all_users_entries": all_users_entries,
-            "user_vote_complete": user_vote_complete,
+            "user_vote_count": user_vote_count,
         },
     )
 

@@ -3,9 +3,13 @@
 {% load static %}
 
 {% block content %}
-{% if request.user.is_authenticated and not user_vote_complete %}
+{% if request.user.is_authenticated and user_vote_count == 0 %}
 <div class="cta">
     <a href="{% url 'main:user' request.user %}">Make your picks &rarr;</a>
+</div>
+{% elif request.user.is_authenticated and user_vote_count < 24 %}
+<div class="cta">
+    <a href="{% url 'main:user' request.user %}">Conclude your picks &rarr;</a>
 </div>
 {% endif %}
 
