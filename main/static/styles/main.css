@@ -606,6 +606,31 @@ textarea {
     padding-bottom: 64px;
 }
 
+footer {
+    background: #f9f9f9;
+}
+
+.footer-content::before {
+    content: '';
+    display: flex;
+    width: 200px;
+    border-top: 1px solid black;
+    padding-bottom: 7px;
+    opacity: 0.5;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 64px;
+    padding-bottom: 8px;
+    color: #b8a372;
+    font-size: 14px;
+    opacity: 0.5;
+    line-height: 1.6;
+}
+
 .helptext {
     font-size: 14px;
 }
