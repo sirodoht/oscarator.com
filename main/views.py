@@ -42,33 +42,33 @@ def index(request):
         all_users_entries[v.user.username].append(v.entry)
 
     # calculate all users successful predictions
-    # user_wins_dict = {}
-    # for u in users:
-    #     user_wins_dict[u.username] = 0
-    # for u in users:
-    #     votes = models.Vote.objects.filter(user=u)
-    #     for v in votes:
-    #         if v.entry.is_winner:
-    #             user_wins_dict[u.username] += 1
+    user_wins_dict = {}
+    for u in users:
+        user_wins_dict[u.username] = 0
+    for u in users:
+        votes = models.Vote.objects.filter(user=u)
+        for v in votes:
+            if v.entry.is_winner:
+                user_wins_dict[u.username] += 1
 
     user_wins = []
-    # values = user_wins_dict.values()
-    # lim = len(values)
-    # values_de = list(values)
-    # for i in range(lim):
-    #     for k, v in user_wins_dict.items():
+    values = user_wins_dict.values()
+    lim = len(values)
+    values_de = list(values)
+    for i in range(lim):
+        for k, v in user_wins_dict.items():
 
-    #         # find max
-    #         max_value = max(values_de)
+            # find max
+            max_value = max(values_de)
 
-    #         if max_value == v:
-    #             user_wins.append({k: v})
-    #             values_de[values_de.index(max_value)] = 0
+            if max_value == v:
+                user_wins.append({k: v})
+                values_de[values_de.index(max_value)] = 0
 
-    # for i in user_wins:
-    #     key = list(i.keys())[0]
-    #     if i[key] == 0:
-    #         del i[key]
+    for i in user_wins:
+        key = list(i.keys())[0]
+        if i[key] == 0:
+            del i[key]
 
     return render(
         request,
