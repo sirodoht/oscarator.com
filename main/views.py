@@ -46,7 +46,7 @@ def index(request):
     for u in users:
         user_wins_dict[u.username] = 0
     for u in users:
-        votes = models.Vote.objects.filter(user=u)
+        votes = models.Vote.objects.filter(user=u, entry__year=2020)
         for v in votes:
             if v.entry.is_winner:
                 user_wins_dict[u.username] += 1
