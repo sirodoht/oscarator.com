@@ -50,7 +50,7 @@ class Entry(models.Model):
     year = models.PositiveSmallIntegerField(default=2020)
 
     def __str__(self):
-        return self.name
+        return self.name + " [" + str(self.year) + "] " + self.category.name
 
 
 class Vote(models.Model):
