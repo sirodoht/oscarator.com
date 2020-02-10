@@ -229,10 +229,10 @@ def user(request, username):
         if form.is_valid():
             entry_id = form.cleaned_data.get("entry")
             entry = models.Entry.objects.get(id=entry_id)
-            models.Vote.objects.filter(
-                entry__category=entry.category, user=request.user
-            ).delete()
-            models.Vote.objects.create(user=request.user, entry=entry)
+            # models.Vote.objects.filter(
+            #     entry__category=entry.category, user=request.user
+            # ).delete()
+            # models.Vote.objects.create(user=request.user, entry=entry)
             return JsonResponse(status=200, data={})
     else:
         form = forms.VoteForm()
