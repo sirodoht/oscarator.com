@@ -30,14 +30,14 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
 
-    user_vote_count = models.Vote.objects.filter(user=request.user, entry__year=2020).count()
+    user_vote_count = models.Vote.objects.filter(user=request.user, entry__year=settings.CURRENT_YEAR).count()
 
     # build all users' entries dict
     all_users_entries = {}
     users = User.objects.all().order_by("?")
     for u in users:
         all_users_entries[u.username] = []
-    votes = models.Vote.objects.filter(entry__year=2020)
+    votes = models.Vote.objects.filter(entry__year=settings.CURRENT_YEAR)
     for v in votes:
         all_users_entries[v.user.username].append(v.entry)
 
@@ -46,7 +46,7 @@ def index(request):
     for u in users:
         user_wins_dict[u.username] = 0
     for u in users:
-        votes = models.Vote.objects.filter(user=u, entry__year=2020)
+        votes = models.Vote.objects.filter(user=u, entry__year=settings.CURRENT_YEAR)
         for v in votes:
             if v.entry.is_winner:
                 user_wins_dict[u.username] += 1
@@ -78,6 +78,7 @@ def index(request):
             "user_wins": user_wins,
             "all_users_entries": all_users_entries,
             "user_vote_count": user_vote_count,
+            "current_year": settings.CURRENT_YEAR,
         },
     )
 
@@ -239,13 +240,13 @@ def user(request, username):
 
     # build this user's votes dict
     categories = models.Category.objects.all()
-    entries = models.Entry.objects.filter(year=2020)
+    entries = models.Entry.objects.filter(year=settings.CURRENT_YEAR)
     user = User.objects.get(username=username)
     user_votes = {}
     for c in categories:
         user_votes[c.name] = []
     for e in entries:
-        if e.year == 2020:
+        if e.year == settings.CURRENT_YEAR:
             user_votes[e.category.name].append(e)
 
     # calculate user successful predictions

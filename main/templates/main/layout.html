@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Share your Oscar predictions.">
 
-    <title>{% block title %}Oscarator 2020{% endblock %}</title>
+    <title>{% block title %}Oscarator {{ current_year }}{% endblock %}</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
@@ -33,7 +33,7 @@
         {% if "@" in request.path %}
         <div class="header-title">Predictions of {{ user.username }}</div>
         {% else %}
-        <a href="{% url 'main:index' %}" class="header-title">OSCARATOR 2020</a>
+        <a href="{% url 'main:index' %}" class="header-title">OSCARATOR {{ current_year }}</a>
         {% endif %}
         <div class="header-down"></div>
     </header>

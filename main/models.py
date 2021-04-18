@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+from oscarator import settings
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -47,7 +49,7 @@ class Entry(models.Model):
     pic_url = models.CharField(max_length=1000)
     imdb = models.CharField(max_length=200, null=True, blank=True)
     is_winner = models.BooleanField(default=False)
-    year = models.PositiveSmallIntegerField(default=2020)
+    year = models.PositiveSmallIntegerField(default=settings.CURRENT_YEAR)
 
     def __str__(self):
         return self.name + " [" + str(self.year) + "] " + self.category.name
