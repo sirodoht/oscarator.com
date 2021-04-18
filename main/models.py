@@ -39,6 +39,9 @@ class Analytic(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=600)
 
+    class Meta:
+        verbose_name_plural = "categories"
+
     def __str__(self):
         return self.name
 
@@ -50,6 +53,9 @@ class Entry(models.Model):
     imdb = models.CharField(max_length=200, null=True, blank=True)
     is_winner = models.BooleanField(default=False)
     year = models.PositiveSmallIntegerField(default=settings.CURRENT_YEAR)
+
+    class Meta:
+        verbose_name_plural = "entries"
 
     def __str__(self):
         return self.name + " [" + str(self.year) + "] " + self.category.name
