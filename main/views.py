@@ -30,7 +30,9 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("main:enter")
 
-    user_vote_count = models.Vote.objects.filter(user=request.user, entry__year=settings.CURRENT_YEAR).count()
+    user_vote_count = models.Vote.objects.filter(
+        user=request.user, entry__year=settings.CURRENT_YEAR
+    ).count()
 
     # build all users' entries dict
     all_users_entries = {}
@@ -42,33 +44,36 @@ def index(request):
         all_users_entries[v.user.username].append(v.entry)
 
     # calculate all users successful predictions
-    user_wins_dict = {}
-    for u in users:
-        user_wins_dict[u.username] = 0
-    for u in users:
-        votes = models.Vote.objects.filter(user=u, entry__year=settings.CURRENT_YEAR)
-        for v in votes:
-            if v.entry.is_winner:
-                user_wins_dict[u.username] += 1
-
     user_wins = []
-    values = user_wins_dict.values()
-    lim = len(values)
-    values_de = list(values)
-    for i in range(lim):
-        for k, v in user_wins_dict.items():
+    if not settings.VOTING_ENABLED:
+        user_wins_dict = {}
+        for u in users:
+            user_wins_dict[u.username] = 0
+        for u in users:
+            votes = models.Vote.objects.filter(
+                user=u, entry__year=settings.CURRENT_YEAR
+            )
+            for v in votes:
+                if v.entry.is_winner:
+                    user_wins_dict[u.username] += 1
 
-            # find max
-            max_value = max(values_de)
+        values = user_wins_dict.values()
+        lim = len(values)
+        values_de = list(values)
+        for i in range(lim):
+            for k, v in user_wins_dict.items():
 
-            if max_value == v:
-                user_wins.append({k: v})
-                values_de[values_de.index(max_value)] = 0
+                # find max
+                max_value = max(values_de)
 
-    for i in user_wins:
-        key = list(i.keys())[0]
-        if i[key] == 0:
-            del i[key]
+                if max_value == v:
+                    user_wins.append({k: v})
+                    values_de[values_de.index(max_value)] = 0
+
+        for i in user_wins:
+            key = list(i.keys())[0]
+            if i[key] == 0:
+                del i[key]
 
     return render(
         request,
@@ -79,6 +84,7 @@ def index(request):
             "all_users_entries": all_users_entries,
             "user_vote_count": user_vote_count,
             "current_year": settings.CURRENT_YEAR,
+            "voting_enabled": settings.VOTING_ENABLED,
         },
     )
 
@@ -230,10 +236,11 @@ def user(request, username):
         if form.is_valid():
             entry_id = form.cleaned_data.get("entry")
             entry = models.Entry.objects.get(id=entry_id)
-            # models.Vote.objects.filter(
-            #     entry__category=entry.category, user=request.user
-            # ).delete()
-            # models.Vote.objects.create(user=request.user, entry=entry)
+            if settings.VOTING_ENABLED:
+                models.Vote.objects.filter(
+                    entry__category=entry.category, user=request.user
+                ).delete()
+                models.Vote.objects.create(user=request.user, entry=entry)
             return JsonResponse(status=200, data={})
     else:
         form = forms.VoteForm()
