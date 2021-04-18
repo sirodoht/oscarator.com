@@ -13,22 +13,24 @@
 </div>
 {% endif %}
 
-<section class="results">
-    <div class="results-content">
-        <h2>Results</h2>
-        <div class="results-content-grid">
-            {% for thing in user_wins %}
-                {% for user, wins in thing.items %}
-                <a href="{% url 'main:user' user %}" class="results-content-grid-user">
-                    <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="32px" class="results-content-grid-user-img">
-                    {{ user }}
-                </a>
-                <div class="results-content-grid-wins">{{ wins }}</div>
+{% if not voting_enabled %}
+    <section class="results">
+        <div class="results-content">
+            <h2>Results</h2>
+            <div class="results-content-grid">
+                {% for thing in user_wins %}
+                    {% for user, wins in thing.items %}
+                    <a href="{% url 'main:user' user %}" class="results-content-grid-user">
+                        <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="32px" class="results-content-grid-user-img">
+                        {{ user }}
+                    </a>
+                    <div class="results-content-grid-wins">{{ wins }}</div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+{% endif %}
 
 <section class="predictions">
     <div class="predictions-title">
