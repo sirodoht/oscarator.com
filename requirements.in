@@ -1,9 +1,2 @@
 django
 psycopg2-binary
-dj-database-url
-whitenoise
-uwsgi
-python-dotenv
-isort
-flake8
-black
