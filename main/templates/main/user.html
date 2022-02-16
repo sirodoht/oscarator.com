@@ -45,7 +45,7 @@
                 >
                     <span class="tooltip-text">{{ e.name }}</span>
                     <img src="
-                    {% if "http" in e.pic_url %}
+                    {% if e.pic_url|slice:":4" == "http" %}
                         {{ e.pic_url }}
                     {% else %}
                         {% static e.pic_url %}
