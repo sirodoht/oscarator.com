@@ -11,11 +11,12 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
-import dj_database_url
+from pathlib import Path
+from urllib import parse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -24,9 +25,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY", "im_a_secret_key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ.get("NODEBUG") is None else False
+DEBUG = True if os.environ.get("DEBUG") == "1" else False
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "oscarator.com"]
+
+ADMINS = [("Theodore Keloglou", "zf@sirodoht.com")]
 
 
 # Application definition
@@ -43,7 +46,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -82,10 +84,21 @@ LOGOUT_REDIRECT_URL = "/"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.postgresql"}}
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES["default"].update(db_from_env)
+database_url = os.environ.get("DATABASE_URL", "")
+database_url = parse.urlparse(database_url)
+# e.g. postgres://mataroa:password@127.0.0.1:5432/mataroa
+database_name = database_url.path[1:]  # url.path is '/mataroa'
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": parse.unquote(database_name or ""),
+        "USER": parse.unquote(database_url.username or ""),
+        "PASSWORD": parse.unquote(database_url.password or ""),
+        "HOST": database_url.hostname,
+        "PORT": database_url.port or "",
+        "CONN_MAX_AGE": 500,
+    }
+}
 
 
 # Password validation
@@ -110,8 +123,6 @@ TIME_ZONE = "UTC"
 
 USE_I18N = False
 
-USE_L10N = False
-
 USE_TZ = False
 
 
@@ -119,8 +130,14 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "_static")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Email
@@ -134,27 +151,9 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 
 DEFAULT_FROM_EMAIL = "Oscar Wild <wild@oscarator.com>"
-
-
-# Logging
-# https://docs.djangoproject.com/en/2.1/topics/logging/
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
-    "formatters": {
-        "verbose": {"format": "[contactor] %(levelname)s %(asctime)s %(message)s"}
-    },
-    "handlers": {
-        # Send all messages to console
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler"}
-    },
-    "loggers": {
-        # This is the "catch all" logger
-        "": {"handlers": ["console"], "level": "DEBUG", "propagate": False}
-    },
-}
+EMAIL_FROM_HOST = "oscarator.org"
+SERVER_EMAIL = "Oscar Server <server@oscarator.org>"
+EMAIL_SUBJECT_PREFIX = "[oscarator] "
 
 
 # Security middleware
