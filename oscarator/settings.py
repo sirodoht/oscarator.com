@@ -86,8 +86,8 @@ LOGOUT_REDIRECT_URL = "/"
 
 database_url = os.environ.get("DATABASE_URL", "")
 database_url = parse.urlparse(database_url)
-# e.g. postgres://mataroa:password@127.0.0.1:5432/mataroa
-database_name = database_url.path[1:]  # url.path is '/mataroa'
+# e.g. postgres://oscarator:password@127.0.0.1:5432/oscarator
+database_name = database_url.path[1:]  # url.path is '/oscarator'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",

@@ -1,7 +1,5 @@
 import random
 
-from main import models
-
 
 def quotes_processor(request):
     quotes = [

@@ -69,6 +69,7 @@ class Entry(models.Model):
             return f"https://www.imdb.com/title/{self.imdb}"
         return None
 
+
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
