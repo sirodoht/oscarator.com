@@ -60,6 +60,14 @@ class Entry(models.Model):
     def __str__(self):
         return self.name + " [" + str(self.year) + "] " + self.category.name
 
+    def get_imdb_url(self):
+        if not self.imdb:
+            return None
+        if self.imdb.startswith("nm"):
+            return f"https://www.imdb.com/name/{self.imdb}"
+        if self.imdb.startswith("tt"):
+            return f"https://www.imdb.com/title/{self.imdb}"
+        return None
 
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
