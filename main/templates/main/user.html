@@ -13,49 +13,51 @@
             </div>
         </div> -->
         {% for category_name, entries in user_votes.items %}
-        <div class="user-content-category">
-            <div class="user-content-category-name">
-                <!-- <div class="user-content-category-name-content">
-                    {{ c.name }}
-                    {% for e in c.entry_set.all %}
-                        {% for v in e.vote_set.all %}
-                            {% if v.user == user and v.entry == e and v.entry.is_winner %}
-                            <img src="{% static 'images/oscar-trophy.svg' %}" alt="oscar trophy icon" height="32px" style="margin-left: 8px; transform: translateY(-8px);">
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                </div> -->
-                <div class="user-content-category-name-content">
-                    {{ category_name }}
-                </div>
-                <div class="user-content-category-name-saved" data-category={{ c.id }}>
-                    saved ✔️
-                </div>
-            </div>
-            <div class="user-content-category-entries">
-                {% for e in entries %}
-                <div class="user-content-category-entries-item tooltip"
-                    title="{{ e.name }}"
-                    data-id="{{ e.id }}"
-                    {% for v in e.vote_set.all %}
-                        {% if v.user == user and v.entry == e %}
-                        data-voted="voted"
-                        {% endif %}
-                    {% endfor %}
-                >
-                    <span class="tooltip-text">{{ e.name }}</span>
-                    <img src="
-                    {% if e.pic_url|slice:":4" == "http" %}
-                        {{ e.pic_url }}
-                    {% else %}
-                        {% static e.pic_url %}
-                    {% endif %}
-                    "
-                    alt="pic" class="user-content-category-entries-item-img">
-                </div>
+            {% if entries %}
+                    <div class="user-content-category">
+                        <div class="user-content-category-name">
+                            <!-- <div class="user-content-category-name-content">
+                                {{ c.name }}
+                                {% for e in c.entry_set.all %}
+                                    {% for v in e.vote_set.all %}
+                                        {% if v.user == user and v.entry == e and v.entry.is_winner %}
+                                        <img src="{% static 'images/oscar-trophy.svg' %}" alt="oscar trophy icon" height="32px" style="margin-left: 8px; transform: translateY(-8px);">
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div> -->
+                            <div class="user-content-category-name-content">
+                                {{ category_name }}
+                            </div>
+                            <div class="user-content-category-name-saved" data-category={{ c.id }}>
+                                saved ✔️
+                            </div>
+                        </div>
+                        <div class="user-content-category-entries">
+                            {% for e in entries %}
+                            <div class="user-content-category-entries-item tooltip"
+                                title="{{ e.name }}"
+                                data-id="{{ e.id }}"
+                                {% for v in e.vote_set.all %}
+                                    {% if v.user == user and v.entry == e %}
+                                    data-voted="voted"
+                                    {% endif %}
+                                {% endfor %}
+                            >
+                                <span class="tooltip-text">{{ e.name }}</span>
+                                <img src="
+                                {% if e.pic_url|slice:":4" == "http" %}
+                                    {{ e.pic_url }}
+                                {% else %}
+                                    {% static e.pic_url %}
+                                {% endif %}
+                                "
+                                alt="pic" class="user-content-category-entries-item-img">
+                            </div>
                 {% endfor %}
+                </div>
             </div>
-        </div>
+            {% endif %}
         {% endfor %}
     </div>
 </section>
