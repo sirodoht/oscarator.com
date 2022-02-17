@@ -1,4 +1,6 @@
-.PHONY: format lint
+.PHONY: format lint all
+
+all: format lint
 
 lint:
 	flake8 --exclude=venv/,.pyenv/,.direnv/ --ignore=E203,E501,W503
