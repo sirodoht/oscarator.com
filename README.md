@@ -1,66 +1,87 @@
 # oscarator.com
 
-> Share your Oscar predictions.
+Share your Oscar predictions.
 
 ## Development
 
-This is a [Django](https://www.djangoproject.com/) codebase. Check out the [Django docs](https://docs.djangoproject.com/) for general technical documentation.
+This is a [Django](https://www.djangoproject.com/) codebase. Check out the
+[Django docs](https://docs.djangoproject.com/) for general technical
+documentation.
 
 ### Structure
 
-The Django project is [`oscarator`](/oscarator). There is one Django app, [`main`](/main) Django app, with all business logic.
+The Django project is `oscarator`. There is one Django app, `main`, with all
+business logic. Application CLI commands are generally divided into two
+categories, those under `python manage.py` and those under `make`.
 
 ### Dependencies
 
-Create virtualenv, enable it and then install requirements:
+This project is configured using Nix and direnv and venv. After cd-ing into it:
+
 ```sh
-python3 -m venv venv
-source venv/bin/activate
+pip install -r requirements_dev.txt
+```
+
+Or for production use:
+
+```
 pip install -r requirements.txt
 ```
 
-> Note: This project uses [pip-tools](https://github.com/jazzband/pip-tools) for dependencies management.
-
-### Environment variables
-
-You need to create a new file named `.env` in the root of this project once you cloned it.
-
-`.env` should contain the following env variables:
-```
-SECRET_KEY="thisisthesecretkey"
-DATABASE_URL="postgres://username:password@localhost:5432/db_name"
-EMAIL_HOST_USER="smtp_user"
-EMAIL_HOST_PASSWORD="smtp_password"
-```
-
-### Database
-
-This project uses PostgreSQL. See above on how to configure it using the `.env` file.
-
-> [How to: Create PostgreSQL DB](https://gist.github.com/sirodoht/0666e232e1baf76f76bac43eb2600e2b)
-
-After creating your local database, you need to apply the migrations:
-```sh
-python manage.py migrate
-```
+This project also uses [pip-tools](https://github.com/jazzband/pip-tools) for
+dependency management.
 
 ### Serve
 
-Finally, you can run the Django development server:
+To run the Django development server:
+
 ```sh
 python manage.py runserver
 ```
 
-Or, run the production-grade `uwsgi` server:
-```sh
-uwsgi --ini=uwsgi.ini -H venv/
+### Environment variables
+
+One can create a new file named `.envrc` in the root of this project. An example
+of what this file should look like exists, named `.envrc.example`.
+
+These are the environment variables supported. The only one that is required
+is the database URL.
+
+```
+DATABASE_URL=postgres://username:password@localhost:5432/oscarator
+SECRET_KEY=thisisthesecretkey
+EMAIL_HOST_USER=smtp_user
+EMAIL_HOST_PASSWORD=smtp_password
+DEBUG=1
 ```
 
-> Note: The `uwsgi` method does not read the `.env` file, so in this case you need to set the env vars in your shell.
+### Database
 
+This project uses PostgreSQL. See above on how to configure it using the
+`.envrc` file.
+
+After creating your local database, you need to apply the migrations:
+
+```sh
+python manage.py migrate
+```
 
 ## Code linting & formatting
 
+The following tools are used for code linting and formatting:
+
+* [black](https://github.com/psf/black) for code formatting.
+* [isort](https://github.com/pycqa/isort) for imports order consistency.
+* [flake8](https://gitlab.com/pycqa/flake8) for code linting.
+
+To use:
+
+```sh
+make format
+make lint
 ```
-black . && isort -y && flake8
-```
+
+## License
+
+This software is licensed under the MIT license. For more information, read the
+[LICENSE](LICENSE) file.
