@@ -297,7 +297,7 @@ def preferences(request):
 
 @require_http_methods(["HEAD", "GET"])
 def edition(request, year):
-    entries = models.Entry.objects.filter(year=year)
+    entries = models.Entry.objects.filter(year=year).order_by("category")
     return render(
         request,
         "main/edition.html",
