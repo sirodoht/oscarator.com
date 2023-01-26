@@ -4,6 +4,14 @@
 
 {% block content %}
 <section class="settings">
+    <div class="settings-profile">
+        <h2>Profile</h2>
+        <label for="username">Username</label>
+        <p>{{ request.user.username }}</p>
+        <label for="email">Email</label>
+        <p>{{ request.user.email }}</p>
+    </div>
+
     <form action="{% url 'main:preferences' %}" method="post" class="settings-password">
         <h2>Change password</h2>
 

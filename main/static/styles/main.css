@@ -601,6 +601,15 @@ textarea {
     padding-bottom: 32px;
 }
 
+.settings-profile {
+    max-width: 350px;
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .settings-logout {
     max-width: 350px;
     padding-left: 32px;
