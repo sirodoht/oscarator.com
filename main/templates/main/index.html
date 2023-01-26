@@ -46,13 +46,7 @@
                 {% for e in entries %}
                 <div class="predictions-content-user-votings-item tooltip">
                     <span class="tooltip-text">{{ e.category.name }}: {{ e.name }}</span>
-                    <img src="
-                        {% if e.pic_url|slice:":4" == "http" %}
-                            {{ e.pic_url }}
-                        {% else %}
-                            {% static e.pic_url %}
-                        {% endif %}
-                        "
+                    <img src="{% static e.pic_url %}"
                         alt="pic"
                         class="predictions-content-user-votings-item-img {% if e.is_winner %}modifier-win{% endif %}"
                     >

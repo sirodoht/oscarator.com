@@ -45,14 +45,7 @@
                                 {% endfor %}
                             >
                                 <span class="tooltip-text">{{ e.name }}</span>
-                                <img src="
-                                {% if e.pic_url|slice:":4" == "http" %}
-                                    {{ e.pic_url }}
-                                {% else %}
-                                    {% static e.pic_url %}
-                                {% endif %}
-                                "
-                                alt="pic" class="user-content-category-entries-item-img">
+                                <img src="{% static e.pic_url %}" alt="pic" class="user-content-category-entries-item-img">
                             </div>
                 {% endfor %}
                 </div>

@@ -19,13 +19,7 @@
                 {% for entry in category.list %}
                 <div class="edition-content-category-content-item tooltip">
                     <span class="tooltip-text">{{ entry.name }}</span>
-                    <img src="
-                        {% if entry.pic_url|slice:":4" == "http" %}
-                            {{ entry.pic_url }}
-                        {% else %}
-                            {% static entry.pic_url %}
-                        {% endif %}
-                        "
+                    <img src="{% static entry.pic_url %}"
                         alt="pic"
                         class="edition-content-category-content-item-img {% if entry.is_winner %}modifier-win{% endif %}"
                     >
