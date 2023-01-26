@@ -1,0 +1,39 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<section class="edition">
+    <div class="edition-title">
+        OSCAR NOMINEES {{ year }}
+    </div>
+    <div class="edition-content">
+        {% regroup entries by category as category_list %}
+        {% for category in category_list %}
+        <div class="edition-content-category">
+            <div class="edition-content-category-title">
+                {{ category.grouper }}
+            </div>
+
+            <div class="edition-content-category-content">
+                {% for entry in category.list %}
+                <div class="edition-content-category-content-item tooltip">
+                    <span class="tooltip-text">{{ entry.name }}</span>
+                    <img src="
+                        {% if entry.pic_url|slice:":4" == "http" %}
+                            {{ entry.pic_url }}
+                        {% else %}
+                            {% static entry.pic_url %}
+                        {% endif %}
+                        "
+                        alt="pic"
+                        class="edition-content-category-content-item-img {% if entry.is_winner %}modifier-win{% endif %}"
+                    >
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

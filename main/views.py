@@ -293,3 +293,16 @@ def preferences(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, "main/settings.html", {"form": form})
+
+
+@require_http_methods(["HEAD", "GET"])
+def edition(request, year):
+    entries = models.Entry.objects.filter(year=year)
+    return render(
+        request,
+        "main/edition.html",
+        {
+            "year": year,
+            "entries": entries,
+        },
+    )

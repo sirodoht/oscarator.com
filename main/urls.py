@@ -18,4 +18,5 @@ urlpatterns = [
     ),
     path("@<username>/", views.user, name="user"),
     path("settings/", views.preferences, name="preferences"),
+    path("edition/<int:year>/", views.edition, name="edition"),
 ]
