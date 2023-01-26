@@ -4,6 +4,7 @@
 # environment
 .envrc
 .venv/
+venv/
 postgres-data/
 
 # generated static
