@@ -1,11 +1,14 @@
+# python
 *.pyc
 
+# environment
+.envrc
+.venv/
+postgres-data/
+
+# generated static
 /static/
 
-.envrc
-
-venv
-.direnv/
-.pyenv/
-
-postgres-data/
+# testing
+.coverage
+htmlcov/
