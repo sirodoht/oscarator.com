@@ -49,7 +49,7 @@
                 {% for e in entries %}
                 <div class="predictions-content-user-votings-item tooltip">
                     <span class="tooltip-text">{{ e.category.name }}: {{ e.name }}</span>
-                    <img src="{% static e.pic_url %}"
+                    <img src="{{ e.pic_url }}"
                         alt="pic"
                         class="predictions-content-user-votings-item-img {% if e.is_winner %}modifier-win{% endif %}"
                     >
