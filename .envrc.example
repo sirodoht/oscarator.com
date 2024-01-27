@@ -3,4 +3,3 @@ export SECRET_KEY=some-secret-key
 export DATABASE_URL=postgres://oscarator:@localhost:5432/oscarator
 export EMAIL_HOST_USER=xxx
 export EMAIL_HOST_PASSWORD=xxx
-use nix
