@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as dj_login
@@ -234,6 +236,8 @@ def forgot_confirm(request, uidb64, token):
 @login_required
 def user(request, username):
     if request.method == "POST":
+        if datetime.now() > datetime(2024, 3, 11, 0, 0, 0):
+            return JsonResponse(status=400, data={})
         form = forms.VoteForm(request.POST)
         if form.is_valid():
             entry_id = form.cleaned_data.get("entry")
