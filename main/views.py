@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as dj_login
