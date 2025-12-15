@@ -64,7 +64,6 @@ def index(request):
         values_de = list(values)
         for i in range(lim):
             for k, v in user_wins_dict.items():
-
                 # find max
                 max_value = max(values_de)
 
