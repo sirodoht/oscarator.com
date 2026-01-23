@@ -73,15 +73,17 @@
       ansible.builtin.shell:
         cmd: curl -LsSf https://astral.sh/uv/0.9.26/install.sh | sh
       become_user: deploy
+      tags: deploy
 
     # repository
     - name: clone
       ansible.builtin.git:
-        repo: https://github.com/sirodoht/oscarator
+        repo: https://github.com/sirodoht/oscarator.com
         dest: /var/www/oscarator
         version: main
         accept_hostkey: true
       become_user: deploy
+      tags: deploy
 
     # systemd
     - name: systemd template
@@ -91,17 +93,21 @@
         owner: root
         group: root
         mode: '0644'
+      tags: deploy
     - name: systemd reload
       ansible.builtin.systemd:
         daemon_reload: true
+      tags: deploy
     - name: systemd enable
       ansible.builtin.systemd:
         name: oscarator
         enabled: yes
+      tags: deploy
     - name: systemd start
       ansible.builtin.systemd:
         name: oscarator
         state: restarted
+      tags: deploy
 
     # deployment specific
     - name: collectstatic
@@ -113,6 +119,7 @@
       args:
         executable: /bin/bash
       become_user: deploy
+      tags: deploy
     - name: migrations
       ansible.builtin.shell:
         cmd: |
@@ -122,11 +129,14 @@
       args:
         executable: /bin/bash
       become_user: deploy
+      tags: deploy
     - name: gunicorn restart
       ansible.builtin.systemd:
         name: oscarator
         state: restarted
+      tags: deploy
     - name: caddy restart
       ansible.builtin.systemd:
         name: caddy
         state: restarted
+      tags: deploy
