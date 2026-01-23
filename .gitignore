@@ -13,3 +13,4 @@ postgres-data/
 # testing
 .coverage
 htmlcov/
+db.sqlite3
