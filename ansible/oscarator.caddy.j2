@@ -1,0 +1,13 @@
+oscatator.com {
+	route {
+		file_server /static/* {
+			root /var/www/oscarator
+		}
+		reverse_proxy 127.0.0.1:5007
+	}
+	encode zstd gzip
+	log {
+		output stdout
+		format console
+	}
+}
