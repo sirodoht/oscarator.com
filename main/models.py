@@ -15,14 +15,15 @@ class Profile(models.Model):
 
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
+def create_user_profile(sender, instance, created, raw, **kwargs):
+    if created and not raw:
         Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+def save_user_profile(sender, instance, raw, **kwargs):
+    if not raw:
+        instance.profile.save()
 
 
 class Analytic(models.Model):
