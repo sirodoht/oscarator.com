@@ -35,3 +35,5 @@ jobs:
         ANSIBLE_USER: ${{ vars.ANSIBLE_USER }}
         DEBUG: ${{ vars.DEBUG }}
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
