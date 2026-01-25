@@ -26,6 +26,34 @@ uv run manage.py migrate
 uv run manage.py runserver
 ```
 
+## Importing entries
+
+To bulk import movie entries from a CSV file, use the `import_entries.py` script:
+
+```sh
+uv run python import_entries.py <csv_file> <category_name>
+```
+
+To preview what would be imported without making changes, use the `--dry-run` flag:
+
+```sh
+uv run python import_entries.py <csv_file> <category_name> --dry-run
+```
+
+The CSV file should have columns: `year`, `title`, `imdb_code`, and `pic_url`. For example:
+
+```csv
+year,title,imdb_code,pic_url
+2026,The Brutalist,tt14905854,https://m.media-amazon.com/images/M/...
+2026,Anora,tt28607951,https://m.media-amazon.com/images/M/...
+```
+
+The script will:
+
+- Download each image from `pic_url`
+- Save it to `main/static/entries/{year}/`
+- Create a database entry in the specified category
+
 ## Format and lint
 
 Run Python formatting with:
