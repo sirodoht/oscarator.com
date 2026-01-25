@@ -1,0 +1,66 @@
+{% extends "main/layout.html" %}
+
+{% load static %}
+
+{% block title %}Hall of Fame {{ viewing_year }} - Oscarator{% endblock %}
+
+{% block content %}
+<section class="hall-of-fame">
+    <div class="hall-of-fame-content">
+        <h2>Hall of Fame</h2>
+        
+        <!-- Year Navigation -->
+        {% if available_years %}
+        <div style="margin-bottom: 32px; text-align: center;">
+            <div style="display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                {% for year in available_years %}
+                    {% if year == viewing_year %}
+                        <span style="padding: 8px 16px; background: #f4c430; color: #000; font-weight: bold; border-radius: 4px;">
+                            {{ year }}
+                        </span>
+                    {% else %}
+                        <a href="{% url 'main:hall_of_fame_year' year %}"
+                           style="padding: 8px 16px; background: #333; color: #fff; text-decoration: none; border-radius: 4px; transition: background 0.2s;">
+                            {{ year }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Rankings -->
+        {% if user_rankings %}
+        <div class="hall-of-fame-rankings">
+            {% for username, score in user_rankings %}
+            <div class="hall-of-fame-ranking-row">
+                <div class="hall-of-fame-ranking-position">
+                    {% if score == top_score %}
+                        <img src="{% static 'images/generic-trophy.svg' %}" alt="trophy icon" height="24px" style="opacity: 1;">
+                    {% else %}
+                        <span style="color: #888; font-size: 14px;">{{ forloop.counter }}</span>
+                    {% endif %}
+                </div>
+                <div class="hall-of-fame-ranking-user">
+                    <a href="{% url 'main:user_year' username viewing_year %}" style="color: #333; text-decoration: none; font-weight: 500;">
+                        {{ username }}
+                    </a>
+                </div>
+                <div class="hall-of-fame-ranking-score">
+                    {{ score }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="text-align: center; color: #888; margin-top: 24px;">
+            {% if viewing_year == current_year and voting_enabled %}
+                Voting is still open for {{ viewing_year }}. Rankings will be available after voting closes.
+            {% else %}
+                No predictions for {{ viewing_year }} yet.
+            {% endif %}
+        </p>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

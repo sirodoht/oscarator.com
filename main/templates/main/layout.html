@@ -25,6 +25,7 @@
     <header>
         <nav>
             <a href="{% url 'main:index' %}" class="header-nav-item">Home</a>
+            <a href="{% url 'main:hall_of_fame' %}" class="header-nav-item">Hall of Fame</a>
             {% if request.user.is_authenticated %}
             <a href="{% url 'main:user' request.user.username %}" class="header-nav-item">@{{ request.user.username }}</a>
             <a href="{% url 'main:preferences' %}" class="header-nav-item">Settings</a>

@@ -407,3 +407,89 @@ def edition(request, year):
             "entries": entries,
         },
     )
+
+
+@require_safe
+def hall_of_fame(request):
+    """Redirect to hall of fame for current year."""
+    # If voting is enabled, redirect to most recent past year
+    if settings.VOTING_ENABLED:
+        past_years = list(
+            models.Entry.objects.filter(year__lt=settings.CURRENT_YEAR)
+            .values_list("year", flat=True)
+            .distinct()
+            .order_by("-year")
+        )
+        if past_years:
+            return redirect("main:hall_of_fame_year", year=past_years[0])
+    return redirect("main:hall_of_fame_year", year=settings.CURRENT_YEAR)
+
+
+@require_safe
+def hall_of_fame_year(request, year):
+    """Display hall of fame rankings for a specific year."""
+    # Don't show current year rankings if voting is still enabled
+    if year == settings.CURRENT_YEAR and settings.VOTING_ENABLED:
+        messages.info(
+            request,
+            "Hall of Fame for the current year will be available after voting closes.",
+        )
+        past_years = list(
+            models.Entry.objects.filter(year__lt=settings.CURRENT_YEAR)
+            .values_list("year", flat=True)
+            .distinct()
+            .order_by("-year")
+        )
+        if past_years:
+            return redirect("main:hall_of_fame_year", year=past_years[0])
+        # If no past years, still show the page but with empty rankings
+        return render(
+            request,
+            "main/hall_of_fame.html",
+            {
+                "user_rankings": [],
+                "viewing_year": year,
+                "current_year": settings.CURRENT_YEAR,
+                "available_years": [year],
+                "voting_enabled": settings.VOTING_ENABLED,
+            },
+        )
+
+    # Get all users who voted in this year
+    users_with_votes = User.objects.filter(vote__entry__year=year).distinct()
+
+    # Calculate win count for each user
+    user_rankings = []
+    for user in users_with_votes:
+        win_count = models.Vote.objects.filter(
+            user=user, entry__year=year, entry__is_winner=True
+        ).count()
+        user_rankings.append((user.username, win_count))
+
+    # Sort by win count (descending), then by username (ascending) for ties
+    user_rankings.sort(key=lambda x: (-x[1], x[0]))
+
+    # Determine the top score for trophy display
+    top_score = user_rankings[0][1] if user_rankings else 0
+
+    # Get all available years for navigation
+    available_years = list(
+        models.Entry.objects.values_list("year", flat=True).distinct().order_by("-year")
+    )
+
+    # Hide current year from navigation if voting is enabled
+    if settings.VOTING_ENABLED:
+        available_years = [y for y in available_years if y != settings.CURRENT_YEAR]
+
+    return render(
+        request,
+        "main/hall_of_fame.html",
+        {
+            "user_rankings": user_rankings,
+            "viewing_year": year,
+            "current_year": settings.CURRENT_YEAR,
+            "available_years": available_years,
+            "top_score": top_score,
+            "voting_enabled": settings.VOTING_ENABLED,
+        },
+    )

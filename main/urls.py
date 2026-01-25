@@ -20,4 +20,6 @@ urlpatterns = [
     path("@<username>/<int:year>/", views.user_year, name="user_year"),
     path("settings/", views.preferences, name="preferences"),
     path("edition/<int:year>/", views.edition, name="edition"),
+    path("hall-of-fame/", views.hall_of_fame, name="hall_of_fame"),
+    path("hall-of-fame/<int:year>/", views.hall_of_fame_year, name="hall_of_fame_year"),
 ]

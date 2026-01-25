@@ -736,3 +736,84 @@ footer {
     font-size: 12px;
     margin-left: 8px;
 }
+
+/* Hall of Fame */
+.hall-of-fame {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+.hall-of-fame-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.hall-of-fame-content h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: #333;
+    font-size: 32px;
+}
+
+.hall-of-fame-rankings {
+    margin-top: 24px;
+}
+
+.hall-of-fame-ranking-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 80px;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.hall-of-fame-ranking-row:hover {
+    background: #f9f9f9;
+}
+
+.hall-of-fame-ranking-row:last-child {
+    border-bottom: none;
+}
+
+.hall-of-fame-ranking-position {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.hall-of-fame-ranking-user {
+    font-size: 18px;
+}
+
+.hall-of-fame-ranking-user a:hover {
+    color: #f4c430 !important;
+    text-decoration: underline !important;
+}
+
+.hall-of-fame-ranking-score {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #f4c430;
+}
+
+@media (max-width: 600px) {
+    .hall-of-fame-content {
+        padding: 20px;
+    }
+    
+    .hall-of-fame-ranking-row {
+        grid-template-columns: 50px 1fr 60px;
+        padding: 12px 8px;
+    }
+    
+    .hall-of-fame-ranking-user,
+    .hall-of-fame-ranking-score {
+        font-size: 16px;
+    }
+}
