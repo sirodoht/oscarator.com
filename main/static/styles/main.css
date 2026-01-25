@@ -716,3 +716,23 @@ footer {
     object-fit: cover;
     border: 5px solid #efece3;
 }
+
+.category-winner-label {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #f0f0f0;
+    border-left: 3px solid #b8a372;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.voting-open-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #2d9517;
+    color: white;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: 8px;
+}

@@ -252,18 +252,34 @@ def user(request, username):
     user = User.objects.get(username=username)
     user_votes = {}
     for c in categories:
-        user_votes[c.name] = []
+        user_votes[c.name] = {
+            "entries": [],
+            "winner": None,
+            "user_voted_for_winner": False,
+        }
+
+    # Get user's votes for this year
+    user_vote_entries = set(
+        models.Vote.objects.filter(
+            user=user, entry__year=settings.CURRENT_YEAR
+        ).values_list("entry_id", flat=True)
+    )
+
     for e in entries:
         if e.year == settings.CURRENT_YEAR:
-            user_votes[e.category.name].append(e)
+            user_votes[e.category.name]["entries"].append(e)
+            if e.is_winner:
+                user_votes[e.category.name]["winner"] = e
+                if e.id in user_vote_entries:
+                    user_votes[e.category.name]["user_voted_for_winner"] = True
 
-    # calculate user successful predictions
+    # calculate user successful predictions, always show for past years
     user_wins = 0
-    # for c in categories:
-    #     for e in c.entry_set.all():
-    #         for v in e.vote_set.all():
-    #             if v.user == user and v.entry == e and v.entry.is_winner:
-    #                 user_wins += 1
+    if not settings.VOTING_ENABLED:
+        votes = models.Vote.objects.filter(user=user, entry__year=settings.CURRENT_YEAR)
+        for v in votes:
+            if v.entry.is_winner:
+                user_wins += 1
 
     # get all available years for navigation
     available_years = list(
@@ -283,6 +299,7 @@ def user(request, username):
             "viewing_year": settings.CURRENT_YEAR,
             "available_years": available_years,
             "is_current_year": True,
+            "voting_enabled": settings.VOTING_ENABLED,
         },
     )
 
@@ -311,12 +328,28 @@ def user_year(request, username, year):
     user = User.objects.get(username=username)
     user_votes = {}
     for c in categories:
-        user_votes[c.name] = []
+        user_votes[c.name] = {
+            "entries": [],
+            "winner": None,
+            "user_voted_for_winner": False,
+        }
+
+    # Get user's votes for this year
+    user_vote_entries = set(
+        models.Vote.objects.filter(user=user, entry__year=year).values_list(
+            "entry_id", flat=True
+        )
+    )
+
     for e in entries:
         if e.year == year:
-            user_votes[e.category.name].append(e)
+            user_votes[e.category.name]["entries"].append(e)
+            if e.is_winner:
+                user_votes[e.category.name]["winner"] = e
+                if e.id in user_vote_entries:
+                    user_votes[e.category.name]["user_voted_for_winner"] = True
 
-    # calculate user successful predictions for this year
+    # calculate user successful predictions for this year, always show
     user_wins = 0
     if year != settings.CURRENT_YEAR or not settings.VOTING_ENABLED:
         votes = models.Vote.objects.filter(user=user, entry__year=year)
@@ -342,6 +375,7 @@ def user_year(request, username, year):
             "viewing_year": year,
             "available_years": available_years,
             "is_current_year": year == settings.CURRENT_YEAR,
+            "voting_enabled": settings.VOTING_ENABLED,
         },
     )
 
