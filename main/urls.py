@@ -17,6 +17,7 @@ urlpatterns = [
         "reset-password/<uidb64>/<token>/", views.forgot_confirm, name="forgot_confirm"
     ),
     path("@<username>/", views.user, name="user"),
+    path("@<username>/<int:year>/", views.user_year, name="user_year"),
     path("settings/", views.preferences, name="preferences"),
     path("edition/<int:year>/", views.edition, name="edition"),
 ]

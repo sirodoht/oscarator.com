@@ -265,6 +265,11 @@ def user(request, username):
     #             if v.user == user and v.entry == e and v.entry.is_winner:
     #                 user_wins += 1
 
+    # get all available years for navigation
+    available_years = list(
+        models.Entry.objects.values_list("year", flat=True).distinct().order_by("-year")
+    )
+
     return render(
         request,
         "main/user.html",
@@ -274,6 +279,69 @@ def user(request, username):
             "user": user,
             "user_wins": user_wins,
             "user_votes": user_votes,
+            "current_year": settings.CURRENT_YEAR,
+            "viewing_year": settings.CURRENT_YEAR,
+            "available_years": available_years,
+            "is_current_year": True,
+        },
+    )
+
+
+@require_http_methods(["HEAD", "GET", "POST"])
+@login_required
+def user_year(request, username, year):
+    if request.method == "POST":
+        form = forms.VoteForm(request.POST)
+        if form.is_valid():
+            entry_id = form.cleaned_data.get("entry")
+            entry = models.Entry.objects.get(id=entry_id)
+            # Only allow voting on current year when voting is enabled
+            if settings.VOTING_ENABLED and year == settings.CURRENT_YEAR:
+                models.Vote.objects.filter(
+                    entry__category=entry.category, user=request.user
+                ).delete()
+                models.Vote.objects.create(user=request.user, entry=entry)
+            return JsonResponse(status=200, data={})
+    else:
+        form = forms.VoteForm()
+
+    # build this user's votes dict for the specified year
+    categories = models.Category.objects.all()
+    entries = models.Entry.objects.filter(year=year)
+    user = User.objects.get(username=username)
+    user_votes = {}
+    for c in categories:
+        user_votes[c.name] = []
+    for e in entries:
+        if e.year == year:
+            user_votes[e.category.name].append(e)
+
+    # calculate user successful predictions for this year
+    user_wins = 0
+    if year != settings.CURRENT_YEAR or not settings.VOTING_ENABLED:
+        votes = models.Vote.objects.filter(user=user, entry__year=year)
+        for v in votes:
+            if v.entry.is_winner:
+                user_wins += 1
+
+    # get all available years for navigation
+    available_years = list(
+        models.Entry.objects.values_list("year", flat=True).distinct().order_by("-year")
+    )
+
+    return render(
+        request,
+        "main/user.html",
+        {
+            "form": form,
+            "categories": categories,
+            "user": user,
+            "user_wins": user_wins,
+            "user_votes": user_votes,
+            "current_year": settings.CURRENT_YEAR,
+            "viewing_year": year,
+            "available_years": available_years,
+            "is_current_year": year == settings.CURRENT_YEAR,
         },
     )
 

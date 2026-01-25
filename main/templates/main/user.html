@@ -5,6 +5,34 @@
 {% block content %}
 <section class="user">
     <div class="user-content">
+        <!-- Year Navigation -->
+        {% if available_years %}
+        <div style="margin-bottom: 24px; text-align: center;">
+            <div style="display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                {% for year in available_years %}
+                    {% if year == viewing_year %}
+                        <span style="padding: 8px 16px; background: #f4c430; color: #000; font-weight: bold; border-radius: 4px;">
+                            {{ year }}
+                        </span>
+                    {% else %}
+                        <a href="{% url 'main:user_year' user.username year %}" 
+                           style="padding: 8px 16px; background: #333; color: #fff; text-decoration: none; border-radius: 4px; transition: background 0.2s;">
+                            {{ year }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if not is_current_year %}
+                <p style="margin-top: 12px; color: #888; font-size: 14px;">
+                    Viewing {{ viewing_year }} predictions
+                    {% if user_wins > 0 %}
+                        - {{ user_wins }} correct prediction{{ user_wins|pluralize }}
+                    {% endif %}
+                </p>
+            {% endif %}
+        </div>
+        {% endif %}
+
         <!-- <div class="user-content-results">
             <div class="user-content-results-circle">
                 <br>
@@ -41,11 +69,12 @@
                                 {% for v in e.vote_set.all %}
                                     {% if v.user == user and v.entry == e %}
                                     data-voted="voted"
+                                    {% if e.is_winner %}data-is-winner="true"{% endif %}
                                     {% endif %}
                                 {% endfor %}
                             >
                                 <span class="tooltip-text">{{ e.name }}</span>
-                                <img src="{{ e.pic_url }}" alt="pic" class="user-content-category-entries-item-img">
+                                <img src="{% static e.pic_url %}" alt="pic" class="user-content-category-entries-item-img">
                             </div>
                 {% endfor %}
                 </div>
@@ -61,6 +90,7 @@
 <script>
     var userAccount = "{{ request.user.username }}";
     var userPage = "{{ user.username }}";
+    var isCurrentYear = {{ is_current_year|yesno:"true,false" }};
 
     function getCsrf() {
         var inputElems = document.querySelectorAll('input');
@@ -141,7 +171,10 @@
         }
     }
 
-    if (userAccount === userPage) {
+    // Only enable voting if:
+    // 1. User is viewing their own page
+    // 2. It's the current year
+    if (userAccount === userPage && isCurrentYear) {
         setupVotes();
     } else {
         makeVotingUnclickable();
