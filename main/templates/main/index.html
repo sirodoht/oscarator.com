@@ -4,17 +4,17 @@
 
 {% block content %}
 
-{% if voting_enabled %}
-
-{% if request.user.is_authenticated and user_vote_count == 0 %}
+{% if request.user.is_authenticated %}
 <div class="cta">
-    <a href="{% url 'main:user' request.user %}">Make your picks &rarr;</a>
-</div>
-{% elif request.user.is_authenticated and user_vote_count < 24 %}
-<div class="cta">
-    <a href="{% url 'main:user' request.user %}">Make your picks &rarr;</a>
+    {% if voting_enabled and user_vote_count < 24 %}
+        <a href="{% url 'main:user' request.user %}">Make your picks &rarr;</a>
+    {% else %}
+        <a href="{% url 'main:user' request.user %}">View My Predictions &rarr;</a>
+    {% endif %}
 </div>
 {% endif %}
+
+{% if voting_enabled %}
 
 {% else %}
 <section class="results">
