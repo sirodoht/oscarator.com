@@ -157,4 +157,4 @@ EMAIL_SUBJECT_PREFIX = "[oscarator] "
 # Oscarator voting settings
 
 CURRENT_YEAR = 2026
-VOTING_ENABLED = True
+VOTING_ENABLED = False
