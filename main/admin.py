@@ -8,6 +8,7 @@ from main import models
 # User
 class OscaratorAdmin(UserAdmin):
     list_display = ("username", "email", "date_joined", "last_login", "id")
+    ordering = ("-date_joined",)
 
 
 admin.site.unregister(User)
